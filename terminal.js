@@ -51,7 +51,7 @@
   };
 
   const projects = [
-    ["salt", "launcher", "glassy minecraft launcher with its own hud + mods, 1.21 to 26.3"],
+    ["salt", "client", "glassy minecraft client with its own hud + mods, 1.21 to 26.3"],
     ["chlorine", "mod", "sodium-compatible performance & power mod for 26.3"],
     ["cornea", "shaderpack", "photon-inspired iris shaders for mid/low-end gpus"],
     ["facet", "web app", "speedcubing timer with a liquid glass ui + wca rules"],
@@ -64,7 +64,7 @@
   const files = {
     "about.txt":
       "hey, i'm oph.\n" +
-      "i make minecraft stuff: a launcher (salt), a performance mod (chlorine),\n" +
+      "i make minecraft stuff: a client (salt), a performance mod (chlorine),\n" +
       "a shaderpack (cornea), plus modpacks, a cube timer and the odd godot game.\n" +
       "most of it is vibe-coded with claude, codex and copilot, then tested\n" +
       "by me until it actually works.",
