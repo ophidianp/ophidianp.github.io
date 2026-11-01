@@ -70,7 +70,7 @@
       "by me until it actually works.",
     "interests.txt": "minecraft · modding · shaders\nspeedcubing · game dev · hack club",
     "projects.txt": projects.map(([name]) => name).join("\n"),
-    ".secret.txt": "you found it. the secret is: sodium does the rendering, chlorine does the rest.\n(also try typing 'accent hotpink')",
+    ".secret.txt": "↑ ↑ ↓ ↓ ← → ← → b a\n\n(on a phone? type it in here instead)",
   };
 
   const splashes = [
@@ -203,20 +203,21 @@
     neofetch: ["system info, kinda", () => neofetch()],
     scramble: ["a 3x3 wca-style scramble", () => print(acc(scramble()))],
     accent: ["change the site colour", ([color]) => {
-      const root = document.documentElement;
       if (!color) {
-        print(`current accent: ${acc(getComputedStyle(root).getPropertyValue("--accent").trim())}`);
-        return print(dim("usage: accent &lt;color&gt;  e.g. accent #ff4fd8, accent orange, accent reset"));
+        print(`current accent: ${acc(rainbowFrame ? "rainbow" : esc(currentAccent()))}`);
+        return print(dim("usage: accent &lt;color&gt;  e.g. accent #ff4fd8, accent orange, accent rainbow, accent reset"));
       }
-      if (color === "reset") {
-        root.style.removeProperty("--accent");
-        try { localStorage.removeItem("accent"); } catch (e) {}
+      if (color.toLowerCase() === "reset") {
+        setAccent(null);
         return print(`accent reset to ${acc("#00e371")}`);
+      }
+      if (color.toLowerCase() === "rainbow") {
+        setAccent("rainbow");
+        return print(`accent set to ${acc("rainbow")}. ${dim("'accent reset' to go back")}`);
       }
       const value = /^[0-9a-f]{3,8}$/i.test(color) ? "#" + color : color;
       if (!CSS.supports("color", value)) return print(err(`accent: '${esc(color)}' isn't a colour`));
-      root.style.setProperty("--accent", value);
-      try { localStorage.setItem("accent", value); } catch (e) {}
+      setAccent(value);
       print(`accent set to ${acc(esc(value))}. ${dim("'accent reset' to go back")}`);
     }],
     splash: ["random splash text", () => print(acc(splashes[Math.floor(Math.random() * splashes.length)]))],
@@ -252,6 +253,7 @@
     const [name, ...args] = raw.trim().split(/\s+/);
     if (!name) return print(dim("$"));
     print(`${dim("$")} ${esc(raw)}`);
+    if (isCheatCode(raw)) return cheatCode();
     const cmd = commands[name.toLowerCase()] || commands[aliases[name.toLowerCase()]];
     if (cmd) cmd[1](args);
     else print(`${err(`command not found: ${esc(name)}`)}. type ${acc("help")} for commands`);
@@ -325,6 +327,160 @@
     if (document.startViewTransition && !reduceMotion) document.startViewTransition(apply);
     else apply();
     if (on) input.focus({ preventScroll: true });
+  }
+
+  // --- accent colour (a colour, "rainbow", or null for the default) ---
+  const root = document.documentElement;
+  const probe = document.createElement("i");
+  let rainbowFrame = 0;
+
+  const currentAccent = () => getComputedStyle(root).getPropertyValue("--accent").trim();
+
+  // dark accents (like blue) get white button text, bright ones get near-black
+  function updateOnAccent() {
+    probe.style.color = currentAccent();
+    document.body.appendChild(probe);
+    const [r, g, b] = getComputedStyle(probe).color.match(/[\d.]+/g).map(Number);
+    probe.remove();
+    const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+    root.style.setProperty("--on-accent", luminance > 0.5 ? "#03130a" : "#ffffff");
+  }
+
+  function startRainbow() {
+    let lastHue = -1;
+    const tick = (now) => {
+      const hue = Math.round(now / 40) % 360;
+      if (hue !== lastHue) {
+        lastHue = hue;
+        root.style.setProperty("--accent", `hsl(${hue} 100% 55%)`);
+        updateOnAccent();
+      }
+      rainbowFrame = requestAnimationFrame(tick);
+    };
+    rainbowFrame = requestAnimationFrame(tick);
+  }
+
+  function setAccent(value) {
+    cancelAnimationFrame(rainbowFrame);
+    rainbowFrame = 0;
+    if (value === "rainbow") startRainbow();
+    else if (value) root.style.setProperty("--accent", value);
+    else root.style.removeProperty("--accent");
+    updateOnAccent();
+    try {
+      if (value) localStorage.setItem("accent", value);
+      else localStorage.removeItem("accent");
+    } catch (e) {}
+  }
+
+  try {
+    if (localStorage.getItem("accent") === "rainbow") startRainbow();
+  } catch (e) {}
+  updateOnAccent();
+
+  // --- the secret: ↑ ↑ ↓ ↓ ← → ← → b a ---
+  const code = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+  let progress = 0;
+
+  // typed version for phones: "↑↑↓↓←→←→ba" or "up up down down left right left right b a"
+  function isCheatCode(raw) {
+    const words = { up: "↑", down: "↓", left: "←", right: "→" };
+    const flat = raw.toLowerCase().replace(/up|down|left|right/g, (w) => words[w]).replace(/[\s,]/g, "");
+    return flat === "↑↑↓↓←→←→ba";
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (["Shift", "Control", "Alt", "Meta", "CapsLock"].includes(e.key)) return;
+    const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+    if (key === code[progress]) progress++;
+    else if (key === "ArrowUp") progress = progress === 2 ? 2 : 1; // ↑↑↑ still counts
+    else progress = 0;
+    if (progress < code.length) return;
+    progress = 0;
+    // the arrows and the b may have messed with the terminal input
+    if (document.activeElement === input) input.value = "";
+    e.preventDefault();
+    cheatCode();
+  });
+
+  function cheatCode() {
+    setAccent("rainbow");
+    print(`${acc("cheat code accepted. rainbow mode: on")} ${dim("('accent reset' to turn it off)")}`);
+    showToast();
+    if (!reduceMotion) blockRain();
+  }
+
+  function showToast() {
+    document.querySelector(".toast")?.remove();
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.setAttribute("role", "status");
+    toast.innerHTML = `<span class="toast-block" aria-hidden="true"></span>
+      <span><b>secret unlocked!</b><small>you know the code. respect.</small></span>`;
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add("show"));
+    setTimeout(() => {
+      toast.classList.remove("show");
+      setTimeout(() => toast.remove(), 400);
+    }, 4500);
+  }
+
+  // blocks fall from the sky, minecraft-style
+  function blockRain() {
+    const canvas = document.createElement("canvas");
+    canvas.className = "block-rain";
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext("2d");
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = (canvas.width = innerWidth * dpr);
+    const h = (canvas.height = innerHeight * dpr);
+    // minecraft-ish blocks, plus rainbow ones to match rainbow mode
+    const palette = ["#5d9b3a", "#8b5a2b", "#8a8a8a", "#4fe0d0", "#f2c94c"];
+    const pickColor = () =>
+      Math.random() < 0.45 ? `hsl(${Math.floor(Math.random() * 360)} 100% 55%)` : palette[Math.floor(Math.random() * palette.length)];
+
+    const blocks = Array.from({ length: 140 }, () => ({
+      x: Math.random() * w,
+      y: -Math.random() * h - 40 * dpr,
+      size: (10 + Math.random() * 14) * dpr,
+      vx: (Math.random() - 0.5) * 2 * dpr,
+      vy: (2 + Math.random() * 4) * dpr,
+      rot: Math.random() * Math.PI,
+      spin: (Math.random() - 0.5) * 0.15,
+      color: pickColor(),
+    }));
+
+    const start = performance.now();
+    let last = start;
+    const frame = (now) => {
+      const t = now - start;
+      // physics is tuned for 60fps; scale by elapsed time so 144hz screens don't fast-forward
+      const dt = Math.min(3, (now - last) / (1000 / 60));
+      last = now;
+      ctx.clearRect(0, 0, w, h);
+      ctx.globalAlpha = t > 3500 ? Math.max(0, 1 - (t - 3500) / 800) : 1;
+      blocks.forEach((b) => {
+        b.vy += 0.12 * dpr * dt;
+        b.x += b.vx * dt;
+        b.y += b.vy * dt;
+        b.rot += b.spin * dt;
+        ctx.save();
+        ctx.translate(b.x, b.y);
+        ctx.rotate(b.rot);
+        const s = b.size;
+        ctx.fillStyle = b.color;
+        ctx.fillRect(-s / 2, -s / 2, s, s);
+        // pixel shading: light top-left, dark bottom-right
+        ctx.fillStyle = "rgba(255,255,255,0.25)";
+        ctx.fillRect(-s / 2, -s / 2, s, s / 4);
+        ctx.fillStyle = "rgba(0,0,0,0.25)";
+        ctx.fillRect(-s / 2, s / 4, s, s / 4);
+        ctx.restore();
+      });
+      if (t < 4300) requestAnimationFrame(frame);
+      else canvas.remove();
+    };
+    requestAnimationFrame(frame);
   }
 
   maxBtn.addEventListener("click", () => setExpanded(!expanded));
