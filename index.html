@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>oph — ophidianp</title>
+  <meta name="description" content="ophidianp: minecraft mods, shaderpacks, launchers, modpacks and little web things.">
+  <meta name="theme-color" content="#00e371">
+  <meta property="og:title" content="oph — ophidianp">
+  <meta property="og:description" content="minecraft mods, shaderpacks, launchers, modpacks and little web things.">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/197118207?v=4">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="logo" href="#top"><span class="prompt">~/</span>oph</a>
+    <nav>
+      <a href="#projects">projects</a>
+      <a href="#modpacks">modpacks</a>
+      <a href="#more">more</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- hero -->
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow mono">&gt; hello world</p>
+        <h1>hey, i'm <span class="accent">oph</span>.</h1>
+        <p class="lede">
+          i make <span class="typed mono" data-words="minecraft mods|shaderpacks|launchers|modpacks|cube timers|godot games|websites">minecraft mods</span><span class="caret" aria-hidden="true">_</span>
+          <br>mostly vibe-coded with ai, always tested by me.
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">see my stuff</a>
+          <a class="btn" href="https://github.com/ophidianp" target="_blank" rel="noopener">github ↗</a>
+          <a class="btn" href="https://modrinth.com/user/ophidianp" target="_blank" rel="noopener">modrinth ↗</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="term">
+          <div class="term-bar"><i></i><i></i><i></i><span class="mono">whoami.sh</span></div>
+          <pre class="mono"><span class="dim">$</span> whoami
+<span class="accent">ophidianp</span> <span class="dim">(oph)</span>
+
+<span class="dim">$</span> cat interests.txt
+minecraft · modding · shaders
+speedcubing · game dev · hack club
+
+<span class="dim">$</span> ls ~/projects | wc -l
+<span class="accent" id="repo-count">12</span>
+
+<span class="dim">$</span> modrinth --downloads
+<span class="accent" id="dl-count">10,779</span> <span class="dim">and counting</span>
+<span class="dim">$</span> <span class="caret">_</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- stats -->
+    <section class="stats reveal">
+      <div><b class="mono" data-count="10779" id="stat-dl">10,779</b><span>modpack downloads</span></div>
+      <div><b class="mono">5</b><span>minecraft projects</span></div>
+      <div><b class="mono">26.3</b><span>latest mc version supported</span></div>
+      <div><b class="mono">∞</b><span>prompts sent</span></div>
+    </section>
+
+    <!-- featured projects -->
+    <section id="projects" class="section">
+      <h2 class="section-title reveal"><span class="mono accent">01.</span> featured projects</h2>
+
+      <div class="grid featured">
+        <article class="card big reveal">
+          <div class="card-top">
+            <span class="tag">launcher</span>
+            <span class="lang mono"><i style="--c:#dea584"></i>rust · java</span>
+          </div>
+          <h3>salt</h3>
+          <p>a clean, glassy minecraft launcher built with tauri. ships its own fabric hud (saltHUD), a set of saltMODs, performance mods out of the box, modrinth + curseforge, skins &amp; capes, friends &amp; chat, and every release from 1.21 to 26.3.</p>
+          <ul class="chips"><li>tauri</li><li>fabric</li><li>microsoft auth</li><li>1.21 → 26.3</li></ul>
+          <div class="links">
+            <a href="https://ophidianp.github.io/Salt/" target="_blank" rel="noopener">website ↗</a>
+            <a href="https://github.com/ophidianp/Salt" target="_blank" rel="noopener">source ↗</a>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-top">
+            <span class="tag">mod</span>
+            <span class="lang mono"><i style="--c:#b07219"></i>java</span>
+          </div>
+          <h3>chlorine</h3>
+          <p>a fabric performance &amp; power-management mod for mc 26.3 that runs alongside sodium. adaptive simulation distance, entity &amp; particle scaling, a fast-travel chunk governor, and distant mob ai throttling.</p>
+          <ul class="chips"><li>fabric</li><li>sodium-compatible</li><li>26.3</li></ul>
+          <div class="links">
+            <a href="https://ophidianp.github.io/chlorine/" target="_blank" rel="noopener">website ↗</a>
+            <a href="https://github.com/ophidianp/chlorine" target="_blank" rel="noopener">source ↗</a>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-top">
+            <span class="tag">shaderpack</span>
+            <span class="lang mono"><i style="--c:#5686a5"></i>glsl</span>
+          </div>
+          <h3>cornea</h3>
+          <p>a photon-inspired iris shaderpack for mc 26.x, tuned for mid/low-end gpus. physically based sky, volumetric clouds, coloured block lights, godrays, and proper water.</p>
+          <ul class="chips"><li>iris</li><li>volumetrics</li><li>made with ai</li></ul>
+          <div class="links">
+            <a href="https://ophidianp.github.io/cornea/" target="_blank" rel="noopener">website ↗</a>
+            <a href="https://github.com/ophidianp/cornea" target="_blank" rel="noopener">source ↗</a>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-top">
+            <span class="tag">web app</span>
+            <span class="lang mono"><i style="--c:#f1e05a"></i>javascript</span>
+          </div>
+          <h3>facet</h3>
+          <p>a speedcubing timer with a liquid glass ui. wca scrambles for 16 events, wca inspection &amp; timing rules, stats widgets, and cstimer import. no build step.</p>
+          <ul class="chips"><li>speedcubing</li><li>web worker</li><li>liquid glass</li></ul>
+          <div class="links">
+            <a href="https://ophidianp.github.io/facet/" target="_blank" rel="noopener">try it ↗</a>
+            <a href="https://github.com/ophidianp/facet" target="_blank" rel="noopener">source ↗</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- modpacks -->
+    <section id="modpacks" class="section">
+      <h2 class="section-title reveal"><span class="mono accent">02.</span> modpacks</h2>
+      <p class="section-sub reveal">fabric packs on modrinth. download counts update live.</p>
+
+      <div class="grid packs">
+        <a class="pack reveal" data-slug="barebonespvp" href="https://modrinth.com/modpack/barebonespvp" target="_blank" rel="noopener">
+          <img src="https://cdn.modrinth.com/data/65idBPUz/f19d2eb6970b4062eafc4b6af5b8fc744844b1a1_96.webp" alt="" width="72" height="72" loading="lazy">
+          <div>
+            <h3>bare pvp</h3>
+            <p>barebones + pvp overlay + some quality of life mods.</p>
+            <div class="pack-meta mono">
+              <span><b class="dl">10,682</b> downloads</span>
+              <span>fabric · 1.21.9 – 26.3</span>
+            </div>
+          </div>
+          <span class="arrow">↗</span>
+        </a>
+
+        <a class="pack reveal" data-slug="vanilla-pluschocolate-chips" href="https://modrinth.com/modpack/vanilla-pluschocolate-chips" target="_blank" rel="noopener">
+          <img src="https://cdn.modrinth.com/data/vUYeAaRS/7f4062f9713dd56e385009223b9de8e7a044d9b5_96.webp" alt="" width="72" height="72" loading="lazy">
+          <div>
+            <h3>vanilla+choco chips</h3>
+            <p>a vanilla+ modpack with visual effects+ !!</p>
+            <div class="pack-meta mono">
+              <span><b class="dl">97</b> downloads</span>
+              <span>fabric · 1.21.5</span>
+            </div>
+          </div>
+          <span class="arrow">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- more -->
+    <section id="more" class="section">
+      <h2 class="section-title reveal"><span class="mono accent">03.</span> other stuff i've made</h2>
+
+      <ul class="list">
+        <li class="reveal">
+          <a href="https://vibepolish.vercel.app" target="_blank" rel="noopener">
+            <span class="name">vibe polish</span>
+            <span class="desc">turns messy thoughts into clean ai prompts, with in-browser models</span>
+            <span class="lang mono"><i style="--c:#3178c6"></i>typescript</span>
+          </a>
+        </li>
+        <li class="reveal">
+          <a href="https://github.com/ophidianp/galveston-mines" target="_blank" rel="noopener">
+            <span class="name">galveston mines</span>
+            <span class="desc">procedurally generated runner game inspired by doors &amp; grace, made with my team</span>
+            <span class="lang mono"><i style="--c:#355570"></i>gdscript</span>
+          </a>
+        </li>
+        <li class="reveal">
+          <a href="https://ophidianp.github.io/swirl_website/" target="_blank" rel="noopener">
+            <span class="name">swirl website</span>
+            <span class="desc">website for swirl</span>
+            <span class="lang mono"><i style="--c:#e34c26"></i>html</span>
+          </a>
+        </li>
+        <li class="reveal">
+          <a href="https://ophidianp.github.io/boba_drops_page/" target="_blank" rel="noopener">
+            <span class="name">boba drops page</span>
+            <span class="desc">simple site for the hack club boba drops program</span>
+            <span class="lang mono"><i style="--c:#e34c26"></i>html</span>
+          </a>
+        </li>
+        <li class="reveal">
+          <a href="https://github.com/ophidianp/godot_thingy" target="_blank" rel="noopener">
+            <span class="name">godot thingy</span>
+            <span class="desc">a godot thingy. it's a thingy.</span>
+            <span class="lang mono"><i style="--c:#355570"></i>gdscript</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- toolbox -->
+    <section class="section">
+      <h2 class="section-title reveal"><span class="mono accent">04.</span> toolbox</h2>
+      <div class="toolbox reveal">
+        <div>
+          <h4 class="mono">languages</h4>
+          <ul class="chips"><li>java</li><li>rust</li><li>glsl</li><li>javascript</li><li>typescript</li><li>gdscript</li><li>html/css</li></ul>
+        </div>
+        <div>
+          <h4 class="mono">tools</h4>
+          <ul class="chips"><li>fabric</li><li>iris</li><li>tauri</li><li>godot</li><li>github pages</li><li>vercel</li></ul>
+        </div>
+        <div>
+          <h4 class="mono">co-pilots</h4>
+          <ul class="chips"><li>claude</li><li>chatgpt codex</li><li>github copilot</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- contact -->
+    <section id="contact" class="section contact reveal">
+      <h2><span class="mono accent">05.</span> say hi</h2>
+      <p>wanna use something i made, report a bug, or just talk minecraft? find me here.</p>
+      <div class="cta center">
+        <a class="btn primary" href="https://github.com/ophidianp" target="_blank" rel="noopener">github ↗</a>
+        <a class="btn" href="https://modrinth.com/user/ophidianp" target="_blank" rel="noopener">modrinth ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mono">
+    <span>© <span id="year">2026</span> ophidianp</span>
+    <span class="dim">vibe-coded, obviously · <span class="accent">#00e371</span></span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
