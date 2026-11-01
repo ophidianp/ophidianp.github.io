@@ -347,9 +347,11 @@
   }
 
   function startRainbow() {
+    root.classList.add("rainbow");
     let lastHue = -1;
     const tick = (now) => {
-      const hue = Math.round(now / 40) % 360;
+      // full cycle every ~4s, in 3° steps so we don't restyle the page every frame
+      const hue = (Math.round(now / 36) * 3) % 360;
       if (hue !== lastHue) {
         lastHue = hue;
         root.style.setProperty("--accent", `hsl(${hue} 100% 55%)`);
@@ -363,6 +365,7 @@
   function setAccent(value) {
     cancelAnimationFrame(rainbowFrame);
     rainbowFrame = 0;
+    root.classList.remove("rainbow");
     if (value === "rainbow") startRainbow();
     else if (value) root.style.setProperty("--accent", value);
     else root.style.removeProperty("--accent");

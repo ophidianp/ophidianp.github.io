@@ -39,7 +39,8 @@
     document.documentElement.classList.add("js");
     try {
       const accent = localStorage.getItem("accent");
-      if (accent && accent !== "rainbow") document.documentElement.style.setProperty("--accent", accent);
+      if (accent === "rainbow") document.documentElement.classList.add("rainbow");
+      else if (accent) document.documentElement.style.setProperty("--accent", accent);
     } catch (e) {}
   </script>
 </head>

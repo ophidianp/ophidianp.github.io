@@ -469,6 +469,38 @@ footer {
   .toast { left: 12px; right: 12px; top: 12px; }
 }
 
+/* rainbow mode (from the cheat code / `accent rainbow`): buttons get a sliding rainbow */
+:root {
+  --rainbow: linear-gradient(90deg, #ff3b3b, #ff9f1c, #ffe14d, #3ddc84, #2ec4ff, #6c5cff, #ff4fd8, #ff3b3b);
+}
+@keyframes rainbow-slide {
+  to { background-position: 0 0, -200% 0; }
+}
+.rainbow .btn {
+  border-color: transparent;
+  background: linear-gradient(var(--bg-2), var(--bg-2)) padding-box, var(--rainbow) border-box;
+  background-size: 100% 100%, 200% 100%;
+  animation: rainbow-slide 1.5s linear infinite;
+}
+.rainbow .btn.primary {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+  background: var(--rainbow) padding-box, var(--rainbow) border-box;
+  background-size: 200% 100%, 200% 100%;
+}
+@keyframes rainbow-slide-text {
+  to { background-position: -200% 0; }
+}
+.rainbow h1 .accent, .rainbow .logo .prompt {
+  background: var(--rainbow);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  animation: rainbow-slide-text 1.5s linear infinite;
+}
+
 /* phones zoom into inputs under 16px */
 @media (pointer: coarse) {
   .term-input { font-size: 16px; }
