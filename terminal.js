@@ -47,6 +47,7 @@
     github: "https://github.com/ophidianp",
     modrinth: "https://modrinth.com/user/ophidianp",
     discord: "https://discord.gg/6RnXtN3xF",
+    wca: "https://www.worldcubeassociation.org/persons/2023NEMA01",
   };
 
   const projects = [
@@ -162,10 +163,12 @@
       print(`github    ${link(places.github)}`);
       print(`modrinth  ${link(places.modrinth)}`);
       print(`discord   ${link(places.discord)}`);
+      print(`wca       ${link(places.wca)}`);
     }],
     github: ["open my github", () => openUrl(places.github)],
     modrinth: ["open my modrinth", () => openUrl(places.modrinth)],
     discord: ["join my discord server", () => openUrl(places.discord)],
+    wca: ["my official cubing results", () => openUrl(places.wca, "wca profile")],
     open: ["open a project: open <name>", ([name]) => {
       const key = (name || "").toLowerCase();
       if (places[key]) return openUrl(places[key], key);
