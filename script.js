@@ -60,9 +60,15 @@ document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
 // live numbers from modrinth + github (falls back to the baked-in values)
 const fmt = (n) => n.toLocaleString("en-US");
+const getJSON = (url) => fetch(url).then((r) => (r.ok ? r.json() : Promise.reject(r.status)));
 
-fetch("https://api.modrinth.com/v2/user/ophidianp/projects")
-  .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+// shared with terminal.js
+const live = {
+  modrinth: getJSON("https://api.modrinth.com/v2/user/ophidianp/projects"),
+  github: getJSON("https://api.github.com/users/ophidianp"),
+};
+
+live.modrinth
   .then((projects) => {
     let total = 0;
     projects.forEach((p) => {
@@ -75,8 +81,7 @@ fetch("https://api.modrinth.com/v2/user/ophidianp/projects")
   })
   .catch(() => {});
 
-fetch("https://api.github.com/users/ophidianp")
-  .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+live.github
   .then((u) => {
     document.getElementById("repo-count").textContent = u.public_repos;
   })

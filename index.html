@@ -34,7 +34,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script>document.documentElement.classList.add("js");</script>
+  <script>
+    document.documentElement.classList.add("js");
+    try {
+      const accent = localStorage.getItem("accent");
+      if (accent) document.documentElement.style.setProperty("--accent", accent);
+    } catch (e) {}
+  </script>
 </head>
 <body>
   <div class="bg-grid" aria-hidden="true"></div>
@@ -69,8 +75,17 @@
 
       <div class="hero-card">
         <div class="term">
-          <div class="term-bar"><i></i><i></i><i></i><span class="mono">whoami.sh</span></div>
-          <pre class="mono"><span class="dim">$</span> whoami
+          <div class="term-bar">
+            <i></i><i></i><i></i>
+            <span class="mono">ophidianp@web: ~</span>
+            <button class="term-max" type="button" aria-label="expand terminal" title="expand (esc to close)">
+              <svg class="icon-grow" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9"/></svg>
+              <svg class="icon-shrink" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 7H9V3M3 9h4v4M9 7l4.5-4.5M7 9l-4.5 4.5"/></svg>
+            </button>
+          </div>
+          <div class="term-body mono">
+            <div class="term-out" aria-live="polite">
+          <pre><span class="dim">$</span> whoami
 <span class="accent">ophidianp</span> <span class="dim">(oph)</span>
 
 <span class="dim">$</span> cat interests.txt
@@ -82,9 +97,16 @@ speedcubing · game dev · hack club
 
 <span class="dim">$</span> modrinth --downloads
 <span class="accent" id="dl-count">10,779</span> <span class="dim">and counting</span>
-<span class="dim">$</span> <span class="caret">_</span></pre>
+</pre>
+            </div>
+            <form class="term-line" autocomplete="off">
+              <label for="term-in" class="dim">$</label>
+              <input id="term-in" class="term-input" type="text" spellcheck="false" autocapitalize="off" placeholder="type 'help' for commands" aria-label="terminal command">
+            </form>
+          </div>
         </div>
       </div>
+      <div class="term-backdrop" aria-hidden="true"></div>
     </section>
 
     <!-- stats -->
@@ -272,5 +294,6 @@ speedcubing · game dev · hack club
   </footer>
 
   <script src="script.js"></script>
+  <script src="terminal.js"></script>
 </body>
 </html>
