@@ -335,7 +335,9 @@ footer {
 
 @media (max-width: 640px) {
   body { font-size: 16px; }
-  .nav nav { gap: 14px; }
+  .logo { font-size: 16px; }
+  .nav nav { gap: 12px; }
+  .nav nav a { font-size: 13px; }
   .nav nav a[href="#more"] { display: none; }
   .featured, .packs { grid-template-columns: 1fr; }
   .term { transform: none; }
