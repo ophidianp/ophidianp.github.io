@@ -179,8 +179,20 @@
       const names = Object.keys(files).filter((f) => flag === "-a" || !f.startsWith("."));
       print(names.map((f) => (f.startsWith(".") ? dim(f) : f)).join("  "));
     }],
+    dir: ["files you can cat", ([flag]) => {
+      const all = /^[/-]a$/i.test(flag || "");
+      const names = Object.keys(files).filter((f) => all || !f.startsWith("."));
+      print(` directory of ~/ophidianp${all ? "" : dim("  (dir /a shows hidden files)")}`);
+      print();
+      names.forEach((f) => {
+        const name = f.startsWith(".") ? dim(f.padEnd(16)) : acc(f.padEnd(16));
+        print(`  ${name}${dim(`${new TextEncoder().encode(files[f]).length} bytes`.padStart(10))}`);
+      });
+      print();
+      print(dim(`${names.length} file(s). read one with: cat &lt;file&gt;`));
+    }],
     cat: ["read a file: cat <file>", ([file]) => {
-      if (!file) return print("usage: cat &lt;file&gt;  " + dim("(see ls)"));
+      if (!file) return print("usage: cat &lt;file&gt;  " + dim("(see dir)"));
       print(files[file] !== undefined ? esc(files[file]) : err(`cat: ${esc(file)}: no such file`));
     }],
     cd: ["change directory", () => print("cd: you're already home. ~ is where the heart is.")],
@@ -276,7 +288,7 @@
     const last = parts.at(-1).toLowerCase();
     let pool = Object.keys(commands);
     if (parts.length === 2) {
-      pool = { open: Object.keys(places), cat: Object.keys(files), accent: ["reset"] }[parts[0].toLowerCase()] || [];
+      pool = { open: Object.keys(places), cat: Object.keys(files), dir: ["/a"], accent: ["reset"] }[parts[0].toLowerCase()] || [];
     } else if (parts.length > 2) return;
     const hits = pool.filter((c) => c.startsWith(last));
     if (hits.length === 1) {
