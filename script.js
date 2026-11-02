@@ -1,7 +1,5 @@
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-document.getElementById("year").textContent = new Date().getFullYear();
-
 // typing effect in the hero
 const typed = document.querySelector(".typed");
 if (typed && !reduceMotion) {

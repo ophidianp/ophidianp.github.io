@@ -224,6 +224,12 @@
     coinflip: ["heads or tails", () => print(Math.random() < 0.5 ? "heads" : "tails")],
     ping: ["are you there", () => print(`pong ${dim(`(${Math.floor(Math.random() * 30) + 8}ms, trust me)`)}`)],
     uptime: ["how long you've been here", () => print(`up ${uptime()}`)],
+    license: ["how my stuff is licensed", () => {
+      print(`${acc("All Rights Reserved (ARR)")}. &copy; Pavan Nemani`);
+      print("everything i make (this site, salt, chlorine, cornea, facet, my modpacks...) is not open source.");
+      print("you can use official releases yourself, but don't copy, modify or re-upload any of it without asking.");
+      print(`full text: ${link("https://github.com/ophidianp/ophidianp.github.io/blob/main/LICENSE", "LICENSE")}`);
+    }],
     sudo: ["try it", () => print(err("ophidianp is not in the sudoers file. this incident will be reported."))],
     rm: ["try it", () => print("rm: nice try.")],
     fullscreen: ["toggle the big terminal", () => setExpanded(!expanded)],
