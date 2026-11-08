@@ -84,3 +84,9 @@ live.github
     document.getElementById("repo-count").textContent = u.public_repos;
   })
   .catch(() => {});
+
+// liquid glass from the Argon app (liquid-glass.js): refraction with a red/blue fringe on
+// cards, packs, stats and buttons (Chromium), glare under the pointer, a gliding lens on the nav
+if (window.LiquidGlass) {
+  LiquidGlass.init({ selectors: ".card, .pack, .stats, .toolbox > div, .btn:not(.primary)", strength: 50, lens: [".nav nav"], lensItems: "a" });
+}
