@@ -26,22 +26,6 @@ if (typed && !reduceMotion) {
   setTimeout(tick, 1800);
 }
 
-// background glow follows the cursor
-const glow = document.querySelector(".glow");
-window.addEventListener("pointermove", (e) => {
-  glow.style.setProperty("--mx", e.clientX + "px");
-  glow.style.setProperty("--my", e.clientY + "px");
-});
-
-// spotlight on cards
-document.querySelectorAll(".card").forEach((card) => {
-  card.addEventListener("pointermove", (e) => {
-    const r = card.getBoundingClientRect();
-    card.style.setProperty("--x", e.clientX - r.left + "px");
-    card.style.setProperty("--y", e.clientY - r.top + "px");
-  });
-});
-
 // reveal sections on scroll
 const io = new IntersectionObserver(
   (entries) => {
@@ -85,8 +69,8 @@ live.github
   })
   .catch(() => {});
 
-// liquid glass from the Argon app (liquid-glass.js): refraction with a red/blue fringe on
-// cards, packs, stats and buttons (Chromium), glare under the pointer, a gliding lens on the nav
+// liquid glass from the Argon app (liquid-glass.js), on the nav bar only (data-glass in
+// index.html) plus the gliding lens on its links. everything else is a solid surface.
 if (window.LiquidGlass) {
-  LiquidGlass.init({ selectors: ".card, .pack, .stats, .toolbox > div, .btn:not(.primary)", strength: 50, lens: [".nav nav"], lensItems: "a" });
+  LiquidGlass.init({ lens: [".nav nav"], lensItems: "a", max: 1 });
 }
