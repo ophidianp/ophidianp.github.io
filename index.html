@@ -37,7 +37,16 @@
   ]
 }
 </script>
-<script src="script.js?v=2" defer></script>
+<script>
+  document.documentElement.classList.add("js");
+  try {
+    const accent = localStorage.getItem("accent");
+    if (accent === "rainbow") document.documentElement.classList.add("rainbow");
+    else if (accent) document.documentElement.style.setProperty("--accent", accent);
+  } catch (e) {}
+</script>
+<script src="script.js?v=3" defer></script>
+<script src="terminal.js?v=2" defer></script>
 </head>
 <body>
 <header class="header" data-glass="60">
@@ -52,20 +61,56 @@
 </header>
 
 <main>
-<div id="top"></div><section class="wrap hero">
-<span class="badge">hello world · <b>ophidianp (oph)</b></span>
+<div id="top"></div><section class="wrap hero has-term">
+<div><span class="badge">hello world · <b>ophidianp (oph)</b></span>
 <h1>hey, i'm <em>oph.</em></h1>
 <p class="lead">i make minecraft mods, shaderpacks, clients, modpacks, cube timers, godot games and websites. mostly vibe-coded with ai, always tested by me.</p>
 <div class="actions"><a class="btn primary" href="#projects">see my stuff ↓</a><a class="btn" href="https://github.com/ophidianp">github ↗</a><a class="btn" href="https://modrinth.com/user/ophidianp">modrinth ↗</a></div>
 <p class="fine">into minecraft · modding · shaders · speedcubing · game dev · hack club</p>
-<div style="margin-top:56px"><div class="stats">
-<div class="stat"><span>modpack downloads</span><b><span id="dl-count">10,779</span></b><small>and counting</small></div>
-<div class="stat"><span>public repos</span><b><span id="repo-count">12</span></b><small>on github</small></div>
+</div>
+<div class="hero-card">
+  <div class="term">
+    <div class="term-bar">
+      <i></i><i></i><i></i>
+      <span>ophidianp@web: ~</span>
+      <button class="term-max" type="button" aria-label="expand terminal" title="expand (esc to close)">
+        <svg class="icon-grow" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9"/></svg>
+        <svg class="icon-shrink" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 7H9V3M3 9h4v4M9 7l4.5-4.5M7 9l-4.5 4.5"/></svg>
+      </button>
+    </div>
+    <div class="term-body">
+      <div class="term-out" aria-live="polite">
+<pre><span class="dim">$</span> whoami
+<span class="accent">ophidianp</span> <span class="dim">(oph)</span>
+
+<span class="dim">$</span> cat interests.txt
+minecraft · modding · shaders
+speedcubing · game dev · hack club
+
+<span class="dim">$</span> ls ~/projects | wc -l
+<span class="accent" id="repo-count">12</span>
+
+<span class="dim">$</span> modrinth --downloads
+<span class="accent" id="dl-count">10,779</span> <span class="dim">and counting</span>
+</pre>
+      </div>
+      <form class="term-line" autocomplete="off">
+        <label for="term-in" class="dim">$</label>
+        <input id="term-in" class="term-input" type="text" spellcheck="false" autocapitalize="off" placeholder="type 'help' for commands" aria-label="terminal command">
+      </form>
+    </div>
+  </div>
+</div>
+<div class="term-backdrop" aria-hidden="true"></div>
+</section>
+<section class="wrap" style="padding-top:56px"><div class="stats">
+<div class="stat"><span>modpack downloads</span><b><span class="dl-count">10,779</span></b><small>and counting</small></div>
+<div class="stat"><span>public repos</span><b><span class="repo-count">12</span></b><small>on github</small></div>
 <div class="stat"><span>minecraft projects</span><b>5</b></div>
 <div class="stat"><span>latest mc version supported</span><b>26.3</b></div>
 <div class="stat"><span>prompts sent</span><b>∞</b></div>
 </div>
-</div></section>
+</section>
 <section class="wrap section" id="projects">
 <div class="section-head"><p class="eyebrow">01 · featured projects</p>
 <h2>things i've <em>built.</em></h2>
