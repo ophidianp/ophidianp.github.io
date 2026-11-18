@@ -6,7 +6,6 @@
   <title>~/ophidianp</title>
   <meta name="description" content="ophidianp (oph): creator of the Salt minecraft client, the Chlorine performance mod, the Cornea shaderpack, Facet cube timer and the bare pvp modpack.">
   <meta name="author" content="ophidianp">
-  <meta name="theme-color" content="#00e371">
   <link rel="canonical" href="https://ophidianp.github.io/">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ophidianp.github.io/">
@@ -31,288 +30,102 @@
   }
   </script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="liquid-glass.css">
-  <link rel="stylesheet" href="style.css">
-  <script>
-    document.documentElement.classList.add("js");
-    try {
-      const accent = localStorage.getItem("accent");
-      if (accent === "rainbow") document.documentElement.classList.add("rainbow");
-      else if (accent) document.documentElement.style.setProperty("--accent", accent);
-    } catch (e) {}
-  </script>
+  <link rel="stylesheet" href="liquid-glass.css?v=2">
+  <link rel="stylesheet" href="style.css?v=2">
+  <script src="liquid-glass.js?v=2" data-auto defer></script>
+  <script src="script.js?v=2" defer></script>
 </head>
 <body>
-  <div class="bg-grid" aria-hidden="true"></div>
-  <div class="glow" aria-hidden="true"></div>
+<header class="header" data-glass="60">
+  <a class="name mono" href="#top"><span class="accent">~/</span>ophidianp</a>
+  <nav aria-label="Main">
+    <a href="#projects">projects</a>
+    <a href="#modpacks">modpacks</a>
+    <a href="#more">more</a>
+    <a href="#contact">contact</a>
+  </nav>
+</header>
 
-  <header class="nav lg-bar" data-glass="77">
-    <a class="logo" href="#top"><span class="prompt">~/</span>ophidianp</a>
-    <nav>
-      <a href="#projects">projects</a>
-      <a href="#modpacks">modpacks</a>
-      <a href="#more">more</a>
-      <a href="#contact">contact</a>
-    </nav>
-  </header>
+<main id="top">
+<p class="mono muted">&gt; hello world</p>
+<h1>hey, i'm <span class="accent">oph</span>.</h1>
+<p class="lead">i make minecraft mods, shaderpacks, clients, modpacks, cube timers, godot games and websites.<br>mostly vibe-coded with ai, always tested by me.</p>
+<div class="actions">
+  <a class="button primary" href="#projects">see my stuff</a>
+  <a class="button" href="https://github.com/ophidianp">github</a>
+  <a class="button" href="https://modrinth.com/user/ophidianp">modrinth</a>
+</div>
+<p class="muted">ophidianp (oph) · into minecraft, modding, shaders, speedcubing, game dev and hack club.</p>
 
-  <main id="top">
-    <!-- hero -->
-    <section class="hero">
-      <div class="hero-text">
-        <p class="eyebrow mono">&gt; hello world</p>
-        <h1>hey, i'm <span class="accent">oph</span>.</h1>
-        <p class="lede">
-          i make <span class="typed mono" data-words="minecraft mods|shaderpacks|clients|modpacks|cube timers|godot games|websites">minecraft mods</span><span class="caret" aria-hidden="true">_</span>
-          <br>mostly vibe-coded with ai, always tested by me.
-        </p>
-        <div class="cta">
-          <a class="btn primary" href="#projects">see my stuff</a>
-          <a class="btn" href="https://github.com/ophidianp" target="_blank" rel="noopener">github ↗</a>
-          <a class="btn" href="https://modrinth.com/user/ophidianp" target="_blank" rel="noopener">modrinth ↗</a>
-        </div>
-      </div>
+<table class="stats">
+  <tbody>
+    <tr><th scope="row">modpack downloads</th><td class="num"><span id="dl-count">10,779</span> and counting</td></tr>
+    <tr><th scope="row">public repos</th><td class="num" id="repo-count">12</td></tr>
+    <tr><th scope="row">minecraft projects</th><td class="num">5</td></tr>
+    <tr><th scope="row">latest mc version supported</th><td class="num">26.3</td></tr>
+    <tr><th scope="row">prompts sent</th><td class="num">∞</td></tr>
+  </tbody>
+</table>
 
-      <div class="hero-card">
-        <div class="term">
-          <div class="term-bar">
-            <i></i><i></i><i></i>
-            <span class="mono">ophidianp@web: ~</span>
-            <button class="term-max" type="button" aria-label="expand terminal" title="expand (esc to close)">
-              <svg class="icon-grow" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9"/></svg>
-              <svg class="icon-shrink" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 7H9V3M3 9h4v4M9 7l4.5-4.5M7 9l-4.5 4.5"/></svg>
-            </button>
-          </div>
-          <div class="term-body mono">
-            <div class="term-out" aria-live="polite">
-          <pre><span class="dim">$</span> whoami
-<span class="accent">ophidianp</span> <span class="dim">(oph)</span>
+<h2 id="projects"><span class="mono muted">01.</span> featured projects</h2>
+<h3>argon <small>· desktop app · typescript, electron</small></h3>
+<p>a board for running coding agents together on windows. claude code, codex and gemini run in real terminals side by side, grouped into teams that plan, build and review, handing work to each other along wires. a simple chat view for each agent, memory meters, loops, and a liquid glass ui with accents, palettes and mica.</p>
+<p class="muted">electron · react flow · node-pty · claude code · liquid glass — <a href="https://ophidianp.github.io/argon/">website</a> · <a href="https://github.com/ophidianp/argon">source</a></p>
 
-<span class="dim">$</span> cat interests.txt
-minecraft · modding · shaders
-speedcubing · game dev · hack club
+<h3>salt <small>· client · rust, java</small></h3>
+<p>a clean, glassy minecraft client built with tauri. ships its own fabric hud (saltHUD), a set of saltMODs, performance mods out of the box, modrinth + curseforge, skins &amp; capes, friends &amp; chat, and every release from 1.21 to 26.3.</p>
+<p class="muted">tauri · fabric · microsoft auth · 1.21 → 26.3 — <a href="https://ophidianp.github.io/Salt/">website</a> · <a href="https://github.com/ophidianp/Salt">source</a></p>
 
-<span class="dim">$</span> ls ~/projects | wc -l
-<span class="accent" id="repo-count">12</span>
+<h3>chlorine <small>· mod · java</small></h3>
+<p>a fabric performance &amp; power-management mod for mc 26.3 that runs alongside sodium. adaptive simulation distance, entity &amp; particle scaling, a fast-travel chunk governor, and distant mob ai throttling.</p>
+<p class="muted">fabric · sodium-compatible · 26.3 — <a href="https://ophidianp.github.io/chlorine/">website</a> · <a href="https://github.com/ophidianp/chlorine">source</a></p>
 
-<span class="dim">$</span> modrinth --downloads
-<span class="accent" id="dl-count">10,779</span> <span class="dim">and counting</span>
-</pre>
-            </div>
-            <form class="term-line" autocomplete="off">
-              <label for="term-in" class="dim">$</label>
-              <input id="term-in" class="term-input" type="text" spellcheck="false" autocapitalize="off" placeholder="type 'help' for commands" aria-label="terminal command">
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="term-backdrop" aria-hidden="true"></div>
-    </section>
+<h3>cornea <small>· shaderpack · glsl</small></h3>
+<p>a photon-inspired iris shaderpack for mc 26.x, tuned for mid/low-end gpus. physically based sky, volumetric clouds, coloured block lights, godrays, and proper water.</p>
+<p class="muted">iris · volumetrics · made with ai — <a href="https://ophidianp.github.io/cornea/">website</a> · <a href="https://github.com/ophidianp/cornea">source</a></p>
 
-    <!-- stats -->
-    <section class="stats reveal">
-      <div><b class="mono" data-count="10779" id="stat-dl">10,779</b><span>modpack downloads</span></div>
-      <div><b class="mono">5</b><span>minecraft projects</span></div>
-      <div><b class="mono">26.3</b><span>latest mc version supported</span></div>
-      <div><b class="mono">∞</b><span>prompts sent</span></div>
-    </section>
+<h3>facet <small>· web app · javascript</small></h3>
+<p>a speedcubing timer with a liquid glass ui. wca scrambles for 16 events, wca inspection &amp; timing rules, stats widgets, and cstimer import. no build step.</p>
+<p class="muted">speedcubing · web worker · liquid glass — <a href="https://ophidianp.github.io/facet/">try it</a> · <a href="https://github.com/ophidianp/facet">source</a></p>
 
-    <!-- featured projects -->
-    <section id="projects" class="section">
-      <h2 class="section-title reveal"><span class="mono accent">01.</span> featured projects</h2>
+<h2 id="modpacks"><span class="mono muted">02.</span> modpacks</h2>
+<p>fabric packs on modrinth. download counts update live.</p>
+<ul class="packs">
+  <li class="pack" data-slug="barebonespvp"><img src="https://cdn.modrinth.com/data/65idBPUz/f19d2eb6970b4062eafc4b6af5b8fc744844b1a1_96.webp" alt="" width="40" height="40" loading="lazy"><div><a href="https://modrinth.com/modpack/barebonespvp"><strong>bare pvp</strong></a> — barebones + pvp overlay + some quality of life mods.<br><small><b class="dl">10,682</b> downloads · fabric · 1.21.9 – 26.3</small></div></li>
+  <li class="pack" data-slug="vanilla-pluschocolate-chips"><img src="https://cdn.modrinth.com/data/vUYeAaRS/7f4062f9713dd56e385009223b9de8e7a044d9b5_96.webp" alt="" width="40" height="40" loading="lazy"><div><a href="https://modrinth.com/modpack/vanilla-pluschocolate-chips"><strong>vanilla+choco chips</strong></a> — a vanilla+ modpack with visual effects+ !!<br><small><b class="dl">97</b> downloads · fabric · 1.21.5</small></div></li>
+</ul>
 
-      <div class="grid featured">
-        <article class="card big reveal">
-          <div class="card-top">
-            <span class="tag">desktop app</span>
-            <span class="lang mono"><i style="--c:#3178c6"></i>typescript · electron</span>
-          </div>
-          <h3>argon</h3>
-          <p>a board for running coding agents together on windows. claude code, codex and gemini run in real terminals side by side, grouped into teams that plan, build and review, handing work to each other along wires. a simple chat view for each agent, memory meters, loops, and a liquid glass ui with accents, palettes and mica.</p>
-          <ul class="chips"><li>electron</li><li>react flow</li><li>node-pty</li><li>claude code</li><li>liquid glass</li></ul>
-          <div class="links">
-            <a href="https://ophidianp.github.io/argon/" target="_blank" rel="noopener">website ↗</a>
-            <a href="https://github.com/ophidianp/argon" target="_blank" rel="noopener">source ↗</a>
-          </div>
-        </article>
+<h2 id="more"><span class="mono muted">03.</span> other stuff i've made</h2>
+<ul>
+  <li><a href="https://vibepolish.vercel.app">vibe polish</a> — turns messy thoughts into clean ai prompts, with in-browser models <small>· typescript</small></li>
+  <li><a href="https://github.com/ophidianp/galveston-mines">galveston mines</a> — procedurally generated runner game inspired by doors &amp; grace, made with my team <small>· gdscript</small></li>
+  <li><a href="https://ophidianp.github.io/swirl_website/">swirl website</a> — website for swirl <small>· html</small></li>
+  <li><a href="https://ophidianp.github.io/boba_drops_page/">boba drops page</a> — simple site for the hack club boba drops program <small>· html</small></li>
+  <li><a href="https://github.com/ophidianp/godot_thingy">godot thingy</a> — a godot thingy. it's a thingy. <small>· gdscript</small></li>
+</ul>
 
-        <article class="card big reveal">
-          <div class="card-top">
-            <span class="tag">client</span>
-            <span class="lang mono"><i style="--c:#dea584"></i>rust · java</span>
-          </div>
-          <h3>salt</h3>
-          <p>a clean, glassy minecraft client built with tauri. ships its own fabric hud (saltHUD), a set of saltMODs, performance mods out of the box, modrinth + curseforge, skins &amp; capes, friends &amp; chat, and every release from 1.21 to 26.3.</p>
-          <ul class="chips"><li>tauri</li><li>fabric</li><li>microsoft auth</li><li>1.21 → 26.3</li></ul>
-          <div class="links">
-            <a href="https://ophidianp.github.io/Salt/" target="_blank" rel="noopener">website ↗</a>
-            <a href="https://github.com/ophidianp/Salt" target="_blank" rel="noopener">source ↗</a>
-          </div>
-        </article>
+<h2><span class="mono muted">04.</span> toolbox</h2>
+<table>
+  <tbody>
+    <tr><th scope="row">languages</th><td>java, rust, glsl, javascript, typescript, gdscript, html/css</td></tr>
+    <tr><th scope="row">tools</th><td>fabric, iris, tauri, godot, github pages, vercel</td></tr>
+    <tr><th scope="row">co-pilots</th><td>claude, chatgpt codex, github copilot</td></tr>
+  </tbody>
+</table>
 
-        <article class="card reveal">
-          <div class="card-top">
-            <span class="tag">mod</span>
-            <span class="lang mono"><i style="--c:#b07219"></i>java</span>
-          </div>
-          <h3>chlorine</h3>
-          <p>a fabric performance &amp; power-management mod for mc 26.3 that runs alongside sodium. adaptive simulation distance, entity &amp; particle scaling, a fast-travel chunk governor, and distant mob ai throttling.</p>
-          <ul class="chips"><li>fabric</li><li>sodium-compatible</li><li>26.3</li></ul>
-          <div class="links">
-            <a href="https://ophidianp.github.io/chlorine/" target="_blank" rel="noopener">website ↗</a>
-            <a href="https://github.com/ophidianp/chlorine" target="_blank" rel="noopener">source ↗</a>
-          </div>
-        </article>
+<h2 id="contact"><span class="mono muted">05.</span> say hi</h2>
+<p>wanna use something i made, report a bug, or just talk minecraft? find me here.</p>
+<div class="actions">
+  <a class="button primary" href="https://github.com/ophidianp">github</a>
+  <a class="button" href="https://modrinth.com/user/ophidianp">modrinth</a>
+  <a class="button" href="https://discord.gg/6RnXtN3xF">discord</a>
+  <a class="button" href="https://www.worldcubeassociation.org/persons/2023NEMA01">wca</a>
+</div>
+</main>
 
-        <article class="card reveal">
-          <div class="card-top">
-            <span class="tag">shaderpack</span>
-            <span class="lang mono"><i style="--c:#5686a5"></i>glsl</span>
-          </div>
-          <h3>cornea</h3>
-          <p>a photon-inspired iris shaderpack for mc 26.x, tuned for mid/low-end gpus. physically based sky, volumetric clouds, coloured block lights, godrays, and proper water.</p>
-          <ul class="chips"><li>iris</li><li>volumetrics</li><li>made with ai</li></ul>
-          <div class="links">
-            <a href="https://ophidianp.github.io/cornea/" target="_blank" rel="noopener">website ↗</a>
-            <a href="https://github.com/ophidianp/cornea" target="_blank" rel="noopener">source ↗</a>
-          </div>
-        </article>
-
-        <article class="card reveal">
-          <div class="card-top">
-            <span class="tag">web app</span>
-            <span class="lang mono"><i style="--c:#f1e05a"></i>javascript</span>
-          </div>
-          <h3>facet</h3>
-          <p>a speedcubing timer with a liquid glass ui. wca scrambles for 16 events, wca inspection &amp; timing rules, stats widgets, and cstimer import. no build step.</p>
-          <ul class="chips"><li>speedcubing</li><li>web worker</li><li>liquid glass</li></ul>
-          <div class="links">
-            <a href="https://ophidianp.github.io/facet/" target="_blank" rel="noopener">try it ↗</a>
-            <a href="https://github.com/ophidianp/facet" target="_blank" rel="noopener">source ↗</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- modpacks -->
-    <section id="modpacks" class="section">
-      <h2 class="section-title reveal"><span class="mono accent">02.</span> modpacks</h2>
-      <p class="section-sub reveal">fabric packs on modrinth. download counts update live.</p>
-
-      <div class="grid packs">
-        <a class="pack reveal" data-slug="barebonespvp" href="https://modrinth.com/modpack/barebonespvp" target="_blank" rel="noopener">
-          <img src="https://cdn.modrinth.com/data/65idBPUz/f19d2eb6970b4062eafc4b6af5b8fc744844b1a1_96.webp" alt="" width="72" height="72" loading="lazy">
-          <div>
-            <h3>bare pvp</h3>
-            <p>barebones + pvp overlay + some quality of life mods.</p>
-            <div class="pack-meta mono">
-              <span><b class="dl">10,682</b> downloads</span>
-              <span>fabric · 1.21.9 – 26.3</span>
-            </div>
-          </div>
-          <span class="arrow">↗</span>
-        </a>
-
-        <a class="pack reveal" data-slug="vanilla-pluschocolate-chips" href="https://modrinth.com/modpack/vanilla-pluschocolate-chips" target="_blank" rel="noopener">
-          <img src="https://cdn.modrinth.com/data/vUYeAaRS/7f4062f9713dd56e385009223b9de8e7a044d9b5_96.webp" alt="" width="72" height="72" loading="lazy">
-          <div>
-            <h3>vanilla+choco chips</h3>
-            <p>a vanilla+ modpack with visual effects+ !!</p>
-            <div class="pack-meta mono">
-              <span><b class="dl">97</b> downloads</span>
-              <span>fabric · 1.21.5</span>
-            </div>
-          </div>
-          <span class="arrow">↗</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- more -->
-    <section id="more" class="section">
-      <h2 class="section-title reveal"><span class="mono accent">03.</span> other stuff i've made</h2>
-
-      <ul class="list">
-        <li class="reveal">
-          <a href="https://vibepolish.vercel.app" target="_blank" rel="noopener">
-            <span class="name">vibe polish</span>
-            <span class="desc">turns messy thoughts into clean ai prompts, with in-browser models</span>
-            <span class="lang mono"><i style="--c:#3178c6"></i>typescript</span>
-          </a>
-        </li>
-        <li class="reveal">
-          <a href="https://github.com/ophidianp/galveston-mines" target="_blank" rel="noopener">
-            <span class="name">galveston mines</span>
-            <span class="desc">procedurally generated runner game inspired by doors &amp; grace, made with my team</span>
-            <span class="lang mono"><i style="--c:#355570"></i>gdscript</span>
-          </a>
-        </li>
-        <li class="reveal">
-          <a href="https://ophidianp.github.io/swirl_website/" target="_blank" rel="noopener">
-            <span class="name">swirl website</span>
-            <span class="desc">website for swirl</span>
-            <span class="lang mono"><i style="--c:#e34c26"></i>html</span>
-          </a>
-        </li>
-        <li class="reveal">
-          <a href="https://ophidianp.github.io/boba_drops_page/" target="_blank" rel="noopener">
-            <span class="name">boba drops page</span>
-            <span class="desc">simple site for the hack club boba drops program</span>
-            <span class="lang mono"><i style="--c:#e34c26"></i>html</span>
-          </a>
-        </li>
-        <li class="reveal">
-          <a href="https://github.com/ophidianp/godot_thingy" target="_blank" rel="noopener">
-            <span class="name">godot thingy</span>
-            <span class="desc">a godot thingy. it's a thingy.</span>
-            <span class="lang mono"><i style="--c:#355570"></i>gdscript</span>
-          </a>
-        </li>
-      </ul>
-    </section>
-
-    <!-- toolbox -->
-    <section class="section">
-      <h2 class="section-title reveal"><span class="mono accent">04.</span> toolbox</h2>
-      <div class="toolbox reveal">
-        <div>
-          <h4 class="mono">languages</h4>
-          <ul class="chips"><li>java</li><li>rust</li><li>glsl</li><li>javascript</li><li>typescript</li><li>gdscript</li><li>html/css</li></ul>
-        </div>
-        <div>
-          <h4 class="mono">tools</h4>
-          <ul class="chips"><li>fabric</li><li>iris</li><li>tauri</li><li>godot</li><li>github pages</li><li>vercel</li></ul>
-        </div>
-        <div>
-          <h4 class="mono">co-pilots</h4>
-          <ul class="chips"><li>claude</li><li>chatgpt codex</li><li>github copilot</li></ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- contact -->
-    <section id="contact" class="section contact reveal">
-      <h2><span class="mono accent">05.</span> say hi</h2>
-      <p>wanna use something i made, report a bug, or just talk minecraft? find me here.</p>
-      <div class="cta center">
-        <a class="btn primary" href="https://github.com/ophidianp" target="_blank" rel="noopener">github ↗</a>
-        <a class="btn" href="https://modrinth.com/user/ophidianp" target="_blank" rel="noopener">modrinth ↗</a>
-        <a class="btn" href="https://discord.gg/6RnXtN3xF" target="_blank" rel="noopener">discord ↗</a>
-        <a class="btn" href="https://www.worldcubeassociation.org/persons/2023NEMA01" target="_blank" rel="noopener">wca ↗</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="mono">
-    <span>&copy; Pavan Nemani &middot; All Rights Reserved (ARR) &middot; <a href="https://github.com/ophidianp/ophidianp.github.io/blob/main/LICENSE" target="_blank" rel="noopener">license</a></span>
-    <span class="dim">vibe-coded, obviously · <span class="accent">#00e371</span></span>
-  </footer>
-
-  <script src="liquid-glass.js"></script>
-  <script src="script.js"></script>
-  <script src="terminal.js"></script>
+<footer>
+  <p>&copy; Pavan Nemani &middot; All Rights Reserved (ARR) &middot; <a href="https://github.com/ophidianp/ophidianp.github.io/blob/main/LICENSE">license</a></p>
+  <p>vibe-coded, obviously</p>
+</footer>
 </body>
 </html>
