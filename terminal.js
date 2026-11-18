@@ -50,6 +50,19 @@
     wca: "https://www.worldcubeassociation.org/persons/2023NEMA01",
   };
 
+  // each project's own website, for `website <name>` (redirects this tab)
+  const websites = {
+    argon: "https://ophidianp.github.io/argon/",
+    salt: "https://ophidianp.github.io/Salt/",
+    chlorine: "https://ophidianp.github.io/chlorine/",
+    cornea: "https://ophidianp.github.io/cornea/",
+    isotope: "https://ophidianp.github.io/isotope/",
+    facet: "https://ophidianp.github.io/facet/",
+    vibepolish: "https://vibepolish.vercel.app",
+    swirl: "https://ophidianp.github.io/swirl_website/",
+    boba: "https://ophidianp.github.io/boba_drops_page/",
+  };
+
   const projects = [
     ["salt", "client", "glassy minecraft client with its own hud + mods, 1.21 to 26.3"],
     ["chlorine", "mod", "sodium-compatible performance & power mod for 26.3"],
@@ -175,6 +188,19 @@
       print(name ? err(`open: no project called '${esc(name)}'`) : "usage: open &lt;name&gt;");
       print(dim(`try: ${Object.keys(places).join(", ")}`));
     }],
+    website: ["go to a project's website: website <name>", ([name]) => {
+      const key = (name || "").toLowerCase();
+      if (websites[key]) {
+        print(`redirecting to ${link(websites[key], key)} ...`);
+        // a short pause so the line above is visible before the page changes
+        setTimeout(() => (window.location.href = websites[key]), 600);
+        return;
+      }
+      if (!name) print("usage: website &lt;name&gt;");
+      else if (places[key]) print(`website: ${esc(key)} doesn't have a website yet. try ${acc(`open ${esc(key)}`)} for its page`);
+      else print(err(`website: no project called '${esc(name)}'`));
+      print(dim(`try: ${Object.keys(websites).join(", ")}`));
+    }],
     ls: ["list files", ([flag]) => {
       const names = Object.keys(files).filter((f) => flag === "-a" || !f.startsWith("."));
       print(names.map((f) => (f.startsWith(".") ? dim(f) : f)).join("  "));
@@ -296,7 +322,7 @@
     const last = parts.at(-1).toLowerCase();
     let pool = Object.keys(commands);
     if (parts.length === 2) {
-      pool = { open: Object.keys(places), cat: Object.keys(files), dir: ["/a"], accent: ["reset"] }[parts[0].toLowerCase()] || [];
+      pool = { open: Object.keys(places), website: Object.keys(websites), cat: Object.keys(files), dir: ["/a"], accent: ["reset"] }[parts[0].toLowerCase()] || [];
     } else if (parts.length > 2) return;
     const hits = pool.filter((c) => c.startsWith(last));
     if (hits.length === 1) {
