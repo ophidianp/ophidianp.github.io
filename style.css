@@ -509,3 +509,25 @@ footer {
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .js .reveal { opacity: 1; transform: none; }
 }
+
+/* minimal layer: flat page, one accent, hairline dividers instead of boxes, no shadows
+   or glows. liquid glass stays on the nav only. restyling only; nothing is hidden. */
+.bg-grid, .glow { display: none; }
+.btn { background: transparent; }
+.btn.primary:hover { background: var(--accent); filter: brightness(1.08); }
+.term { box-shadow: none; background: var(--bg-2); }
+.stats { border: 0; border-block: 1px solid var(--line); border-radius: 0; background: none; }
+.stats div:first-child { padding-left: 0; }
+.featured { gap: 40px 40px; }
+.card, .card:hover { padding: 28px 0 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; box-shadow: none; }
+.card:hover { border-top-color: var(--accent-line); }
+.tag { background: none; padding: 0; }
+.chips li { background: none; border-radius: 999px; }
+.packs { gap: 40px; }
+.pack, .pack:hover { padding: 26px 0 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; }
+.pack:hover { border-top-color: var(--accent-line); }
+.pack .arrow { top: 26px; right: 0; }
+.list a:hover { background: none; }
+.toolbox { gap: 40px; }
+.toolbox > div { padding: 24px 0 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; }
+@media (max-width: 900px) { .stats div:nth-child(3) { padding-left: 0; } }
