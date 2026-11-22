@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="ophidianp (oph): creator of the Salt minecraft client, the Chlorine performance mod, the Cornea shaderpack, Facet cube timer and the bare pvp modpack.">
+<meta name="description" content="ophidianp (oph): creator of the Salt minecraft client, the Chlorine performance mod, the Cornea shaderpack, Facet cube timer, the Mouse 33 G305 shell and the bare pvp modpack.">
 <meta name="theme-color" content="#0c0c0a">
 <title>~/ophidianp</title>
 <link rel="icon" href="favicon.svg">
@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;family=Instrument+Serif:ital@0;1&amp;display=swap">
 <link rel="stylesheet" href="liquid-glass.css?v=2">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 <script src="liquid-glass.js?v=2" data-auto defer></script>
 <link rel="canonical" href="https://ophidianp.github.io/">
 <meta name="author" content="ophidianp">
@@ -45,8 +45,8 @@
     else if (accent) document.documentElement.style.setProperty("--accent", accent);
   } catch (e) {}
 </script>
-<script src="script.js?v=3" defer></script>
-<script src="terminal.js?v=3" defer></script>
+<script src="script.js?v=4" defer></script>
+<script src="terminal.js?v=4" defer></script>
 </head>
 <body>
 <header class="header" data-glass="60">
@@ -64,7 +64,7 @@
 <div id="top"></div><section class="wrap hero has-term">
 <div><span class="badge">hello world · <b>ophidianp (oph)</b></span>
 <h1>hey, i'm <em>oph.</em></h1>
-<p class="lead">i make minecraft mods, shaderpacks, clients, modpacks, cube timers, godot games and websites. mostly vibe-coded with ai, always tested by me.</p>
+<p class="lead">i make minecraft mods, shaderpacks, clients, modpacks, cube timers, godot games, 3d-printed mice and websites. mostly vibe-coded with ai, always tested by me.</p>
 <div class="actions"><a class="btn primary" href="#projects">see my stuff ↓</a><a class="btn" href="https://github.com/ophidianp">github ↗</a><a class="btn" href="https://modrinth.com/user/ophidianp">modrinth ↗</a></div>
 <p class="fine">into minecraft · modding · shaders · speedcubing · game dev · hack club</p>
 </div>
@@ -118,6 +118,7 @@ speedcubing · game dev · hack club
 <div class="grid ">
 <article class="card project wide"><div class="meta"><span class="label" style="margin:0">desktop app</span><span class="lang">typescript · electron</span></div><h3>argon</h3><p>a board for running coding agents together on windows. claude code, codex and gemini run in real terminals side by side, grouped into teams that plan, build and review, handing work to each other along wires. a simple chat view for each agent, memory meters, loops, and a liquid glass ui with accents, palettes and mica.</p><ul class="tags"><li>electron</li><li>react flow</li><li>node-pty</li><li>claude code</li><li>liquid glass</li></ul><div class="links"><a href="https://ophidianp.github.io/argon/">website ↗</a><a href="https://github.com/ophidianp/argon">source ↗</a></div></article>
 <article class="card project "><div class="meta"><span class="label" style="margin:0">client</span><span class="lang">rust · java</span></div><h3>salt</h3><p>a clean, glassy minecraft client built with tauri. ships its own fabric hud (saltHUD), a set of saltMODs, performance mods out of the box, modrinth + curseforge, skins &amp; capes, friends &amp; chat, and every release from 1.21 to 26.3.</p><ul class="tags"><li>tauri</li><li>fabric</li><li>microsoft auth</li><li>1.21 → 26.3</li></ul><div class="links"><a href="https://ophidianp.github.io/Salt/">website ↗</a><a href="https://github.com/ophidianp/Salt">source ↗</a></div></article>
+<article class="card project feature"><div class="feature-text"><div class="meta"><span class="label" style="margin:0">hardware · 3d print</span><span class="lang">blender · stl</span></div><h3>mouse 33</h3><p>a skeleton shell for the logitech g305 that brings it down to about 33 grams. five printed parts re-house the stock board, hero sensor, switches and a single aaa. the stl files are free; printed kits and fully assembled mice are coming.</p><ul class="tags"><li>~33 g</li><li>g305 mod</li><li>5 printed parts</li><li>cc by-sa</li></ul><div class="links"><a href="https://ophidianp.github.io/mouse33/">website ↗</a><a href="https://ophidianp.github.io/mouse33/files/mouse33_stl.zip">stl files ↓</a><a href="https://www.thingiverse.com/thing:7298725">thingiverse ↗</a></div></div><a class="feature-img" href="https://ophidianp.github.io/mouse33/" tabindex="-1" aria-hidden="true"><img src="img/mouse33.webp" alt="" width="1400" height="1120" loading="lazy"></a></article>
 <article class="card project "><div class="meta"><span class="label" style="margin:0">mod</span><span class="lang">java</span></div><h3>chlorine</h3><p>a fabric performance &amp; power-management mod for mc 26.3 that runs alongside sodium. adaptive simulation distance, entity &amp; particle scaling, a fast-travel chunk governor, and distant mob ai throttling.</p><ul class="tags"><li>fabric</li><li>sodium-compatible</li><li>26.3</li></ul><div class="links"><a href="https://ophidianp.github.io/chlorine/">website ↗</a><a href="https://github.com/ophidianp/chlorine">source ↗</a></div></article>
 <article class="card project "><div class="meta"><span class="label" style="margin:0">shaderpack</span><span class="lang">glsl</span></div><h3>cornea</h3><p>a photon-inspired iris shaderpack for mc 26.x, tuned for mid/low-end gpus. physically based sky, volumetric clouds, coloured block lights, godrays, and proper water.</p><ul class="tags"><li>iris</li><li>volumetrics</li><li>made with ai</li></ul><div class="links"><a href="https://ophidianp.github.io/cornea/">website ↗</a><a href="https://github.com/ophidianp/cornea">source ↗</a></div></article>
 <article class="card project "><div class="meta"><span class="label" style="margin:0">web app</span><span class="lang">javascript</span></div><h3>facet</h3><p>a speedcubing timer with a liquid glass ui. wca scrambles for 16 events, wca inspection &amp; timing rules, stats widgets, and cstimer import. no build step.</p><ul class="tags"><li>speedcubing</li><li>web worker</li><li>liquid glass</li></ul><div class="links"><a href="https://ophidianp.github.io/facet/">try it ↗</a><a href="https://github.com/ophidianp/facet">source ↗</a></div></article>

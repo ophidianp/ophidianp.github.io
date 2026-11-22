@@ -26,3 +26,35 @@ live.modrinth
 live.github
   .then((u) => setAll("#repo-count, .repo-count", u.public_repos))
   .catch(() => {});
+
+// ---------- motion: scroll reveal, staggered per group, + cursor spotlight on cards ----------
+if (!reduceMotion && "IntersectionObserver" in window) {
+  const groups = [
+    [".stats"],
+    [".section-head"],
+    [".grid > .card", 0.07],
+    [".rows > .row", 0.05],
+    [".cta"],
+    ["footer"],
+  ];
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { const t = e.target; t.classList.add("in"); io.unobserve(t); setTimeout(() => t.style.removeProperty("--d"), 1400); } });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+  groups.forEach(([sel, step]) => {
+    const seen = new Map();
+    document.querySelectorAll(sel).forEach((el) => {
+      const parent = el.parentElement, i = seen.get(parent) || 0;
+      seen.set(parent, i + 1);
+      if (step) el.style.setProperty("--d", `${Math.min(i, 6) * step}s`);
+      el.classList.add("reveal");
+      io.observe(el);
+    });
+  });
+}
+document.querySelectorAll(".card").forEach((card) => {
+  card.addEventListener("pointermove", (e) => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    card.style.setProperty("--my", `${e.clientY - r.top}px`);
+  });
+});
