@@ -379,3 +379,10 @@ html { scroll-behavior: smooth; }
   .reveal, .section-head.reveal h2 em { opacity: 1 !important; transform: none !important; transition: none !important; }
   .card, .btn, .feature-img img, .list .row h3 { transition: none !important; transform: none !important; }
 }
+
+/* mouse 33 card: the project's own logo, with its blue sweeping across on hover */
+.project h3.m33-logo { position: relative; width: 150px; aspect-ratio: 109.71/28.2; margin: 4px 0 16px; }
+.m33-logo svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.m33-logo .base { color: var(--text); }
+.m33-logo .fillp { color: #5872F2; clip-path: inset(0 100% 0 0); transition: clip-path 0.8s var(--ease-out); }
+.card.feature:hover .m33-logo .fillp { clip-path: inset(0 0 0 0); }
