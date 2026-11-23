@@ -146,11 +146,13 @@
   // --- commands ---
   const history = [];
   const commands = {
-    help: ["list commands", () => {
+    help: ["list commands, or help <command> for its options", ([name]) => {
+      if (name) return showHelp(name);
       print(`${Object.keys(commands).length} commands:`);
       Object.entries(commands).forEach(([name, [desc]]) => print(`  ${acc(name.padEnd(12))}${dim(esc(desc))}`));
       print();
-      print(dim("tip: ↑/↓ for history, tab to autocomplete, esc to leave fullscreen"));
+      print(dim(`tip: add ${acc("help")} after a command to see its options, e.g. ${acc("accent help")}`));
+      print(dim("↑/↓ for history, tab to autocomplete, esc to leave fullscreen"));
     }],
     whoami: ["who's this", () => print(`${acc("ophidianp")} ${dim("(oph)")}`)],
     about: ["a bit about me", () => print(files["about.txt"])],
@@ -196,7 +198,19 @@
       print(`wca       ${link(places.wca)}`);
     }],
     github: ["open my github", () => openUrl(places.github)],
-    modrinth: ["open my modrinth", () => openUrl(places.modrinth)],
+    modrinth: ["open my modrinth", ([opt]) => {
+      const o = (opt || "").toLowerCase();
+      if (!o) return openUrl(places.modrinth);
+      if (o === "--downloads" || o === "downloads") {
+        return live.modrinth
+          .then((ps) => print(`${acc(fmt(ps.reduce((t, p) => t + p.downloads, 0)))} ${dim("and counting")}`))
+          .catch(() => print(err("couldn't reach modrinth, try again later")));
+      }
+      if (o === "packs" || o === "--packs") return commands.modpacks[1]([]);
+      if (modrinthPacks[o]) return openUrl(modrinthPacks[o], o);
+      print(err(`modrinth: unknown option '${esc(opt)}'`));
+      print(dim(`try: ${acc("modrinth help")}`));
+    }],
     discord: ["join my discord server", () => openUrl(places.discord)],
     wca: ["my official cubing results", () => openUrl(places.wca, "wca profile")],
     open: ["open a project: open <name>", ([name]) => {
@@ -248,8 +262,8 @@
     accent: ["change the site colour", ([color]) => {
       if (!color) {
         print(`current accent: ${acc(rainbowFrame ? "rainbow" : esc(currentAccent()))}`);
-        print(dim("usage: accent &lt;color&gt;  e.g. accent #ff4fd8, accent orange, accent rainbow, accent reset"));
-        return print(dim(`or a project's own colour: ${Object.keys(projectAccents).join(", ")}`));
+        print(dim("usage: accent &lt;color&gt;  e.g. accent #ff4fd8, accent orange, accent salt, accent reset"));
+        return print(dim(`every option: ${acc("accent help")}`));
       }
       const named = projectAccents[accentAliases[color.toLowerCase()] || color.toLowerCase()];
       if (named) {
@@ -288,6 +302,46 @@
   };
   const aliases = { cls: "clear", max: "fullscreen", "?": "help", info: "about", fetch: "neofetch" };
 
+  // `<command> help` / `help <command>`: every option a command takes.
+  // only the visible ones: secret options and hidden files stay out of here.
+  const modrinthPacks = { barepvp: places.barepvp, chocochips: places.chocochips };
+  const row = (name, note = "") => print(`  ${acc(esc(name.padEnd(16)))}${dim(note)}`);
+  const visibleFiles = () => Object.keys(files).filter((f) => !f.startsWith("."));
+  const options = {
+    accent: () => {
+      row("#hex", "any hex colour, e.g. accent #ff4fd8 (the # is optional)");
+      row("colour name", "any css colour, e.g. accent orange");
+      row("reset", "back to the default green (#00e371)");
+      print();
+      print(dim("or a project's own colour:"));
+      Object.entries(projectAccents).forEach(([name, c]) => print(`  <span style="color:${c}">■</span> ${acc(name.padEnd(14))}${dim(c)}`));
+    },
+    modrinth: () => {
+      row("(nothing)", "open my modrinth profile");
+      row("--downloads", "total downloads across my packs (live)");
+      row("packs", "list my packs with their download counts");
+      Object.keys(modrinthPacks).forEach((p) => row(p, `open the ${p} pack`));
+    },
+    open: () => Object.entries(places).forEach(([k, u]) => row(k, u.replace(/^https?:\/\//, "").replace(/\/$/, ""))),
+    website: () => Object.entries(websites).forEach(([k, u]) => row(k, u.replace(/^https?:\/\//, "").replace(/\/$/, ""))),
+    cat: () => visibleFiles().forEach((f) => row(f)),
+    ls: () => { row("(nothing)", "list files"); row("-a", "include hidden files"); },
+    dir: () => { row("(nothing)", "files you can cat, with sizes"); row("/a", "include hidden files"); },
+    echo: () => row("<text>", "prints it back"),
+    help: () => { row("(nothing)", "list every command"); row("<command>", "that command's options, same as &lt;command&gt; help"); },
+  };
+  const usage = { accent: "accent &lt;colour | project | reset&gt;", modrinth: "modrinth [option]", open: "open &lt;name&gt;", website: "website &lt;name&gt;", cat: "cat &lt;file&gt;", ls: "ls [-a]", dir: "dir [/a]", echo: "echo &lt;text&gt;", help: "help [command]" };
+
+  function showHelp(raw) {
+    const key = raw.toLowerCase();
+    const name = commands[key] ? key : aliases[key];
+    if (!name || !commands[name]) return print(`${err(`help: no command called '${esc(raw)}'`)}. type ${acc("help")} for the list`);
+    print(`${acc(name)}  ${dim(esc(commands[name][0]))}`);
+    print(`usage: ${usage[name] || name}`);
+    if (options[name]) { print(); options[name](); }
+    else print(dim("no options, just type it."));
+  }
+
   function neofetch() {
     const creeper = ["########", "########", "#..##..#", "#..##..#", "###..###", "##....##", "##....##", "##.##.##"];
     const art = creeper.map((row) => acc([...row].map((c) => (c === "#" ? "██" : "  ")).join("")));
@@ -311,6 +365,7 @@
     print(`${dim("$")} ${esc(raw)}`);
     if (isCheatCode(raw)) return cheatCode();
     const cmd = commands[name.toLowerCase()] || commands[aliases[name.toLowerCase()]];
+    if (cmd && cmd !== commands.echo && cmd !== commands.help && /^(help|--help|-h|\/\?)$/i.test(args[0] || "")) return showHelp(name);
     if (cmd) cmd[1](args);
     else print(`${err(`command not found: ${esc(name)}`)}. type ${acc("help")} for commands`);
   };
@@ -346,7 +401,11 @@
     const last = parts.at(-1).toLowerCase();
     let pool = Object.keys(commands);
     if (parts.length === 2) {
-      pool = { open: Object.keys(places), website: Object.keys(websites), cat: Object.keys(files), dir: ["/a"], accent: ["reset", "rainbow", ...Object.keys(projectAccents)] }[parts[0].toLowerCase()] || [];
+      const first = parts[0].toLowerCase();
+      pool = first === "help" ? Object.keys(commands) : [
+        ...({ open: Object.keys(places), website: Object.keys(websites), cat: visibleFiles(), dir: ["/a"], ls: ["-a"], accent: ["reset", ...Object.keys(projectAccents)], modrinth: ["--downloads", "packs", ...Object.keys(modrinthPacks)] }[first] || []),
+        "help",
+      ];
     } else if (parts.length > 2) return;
     const hits = pool.filter((c) => c.startsWith(last));
     if (hits.length === 1) {
