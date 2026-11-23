@@ -7,9 +7,10 @@
   color-scheme: dark;
   --accent: #00e371;
   --accent-ink: #0b0b09;
-  --bg: #111111; /* plain dark grey, no accent tint */
-  --surface: #181818;
-  --surface-2: #1f1f1f;
+  /* near-black with a slight tint of the accent; follows `accent` changes from the console */
+  --bg: color-mix(in srgb, var(--accent) 3%, #08090b);
+  --surface: color-mix(in srgb, var(--accent) 4%, #111214);
+  --surface-2: color-mix(in srgb, var(--accent) 5%, #18191c);
   --line: rgba(242, 239, 230, 0.08);
   --line-2: rgba(242, 239, 230, 0.15);
   --text: #f2efe6;
@@ -328,13 +329,13 @@ html { scroll-behavior: smooth; }
 /* hero entrance */
 @keyframes rise { from { opacity: 0; transform: translateY(22px); filter: blur(6px); } }
 @keyframes rise-card { from { opacity: 0; transform: translateY(36px) scale(0.97); } }
-.js .hero .badge, .js .hero h1, .js .hero .lead, .js .hero .actions, .js .hero .fine { animation: rise 0.9s var(--ease-out) both; }
+.js .hero .badge, .js .hero h1, .js .hero .lead, .js .hero .actions, .js .hero .fine { animation: rise 0.9s var(--ease-out) backwards; }
 .js .hero h1 { animation-delay: 0.08s; }
 .js .hero .lead { animation-delay: 0.18s; }
 .js .hero .actions { animation-delay: 0.28s; }
 .js .hero .fine { animation-delay: 0.36s; }
-.js .hero-card { animation: rise-card 1.1s 0.25s var(--ease-out) both; }
-.js .header { animation: rise 0.8s var(--ease-out) both; }
+.js .hero-card { animation: rise-card 1.1s 0.25s var(--ease-out) backwards; }
+.js .header { animation: rise 0.8s var(--ease-out) backwards; }
 
 /* scroll reveal (script.js adds .reveal, then .in when on screen) */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); transition-delay: var(--d, 0s); }
