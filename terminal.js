@@ -69,7 +69,7 @@
     ["salt", "client", "glassy minecraft client with its own hud + mods, 1.21 to 26.3"],
     ["chlorine", "mod", "sodium-compatible performance & power mod for 26.3"],
     ["cornea", "shaderpack", "photon-inspired iris shaders for mid/low-end gpus"],
-    ["facet", "web app", "speedcubing timer with a liquid glass ui + wca rules"],
+    ["isotope", "mod", "runs fabric mods built for another 26.x version on yours"],
     ["mouse33", "hardware", "~33 g 3d-printed skeleton shell for the logitech g305"],
     ["vibepolish", "web app", "turns messy thoughts into clean ai prompts"],
     ["galveston", "game", "procedural runner in godot, made with my team"],

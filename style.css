@@ -381,8 +381,21 @@ html { scroll-behavior: smooth; }
 }
 
 /* mouse 33 card: the project's own logo, with its blue sweeping across on hover */
-.project h3.m33-logo { position: relative; width: 150px; aspect-ratio: 109.71/28.2; margin: 4px 0 16px; }
-.m33-logo svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.m33-logo .base { color: var(--text); }
-.m33-logo .fillp { color: #5872F2; clip-path: inset(0 100% 0 0); transition: clip-path 0.8s var(--ease-out); }
-.card.feature:hover .m33-logo .fillp { clip-path: inset(0 0 0 0); }
+.project h3.proj-logo { position: relative; max-width: 100%; margin: 4px 0 18px; }
+.proj-logo svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.proj-logo .base { color: var(--text); }
+.proj-logo .fillp { color: var(--fill, var(--accent)); clip-path: inset(0 100% 0 0); transition: clip-path 0.8s var(--ease-out); }
+.card.feature:hover .proj-logo .fillp { clip-path: inset(0 0 0 0); }
+
+/* every project gets the feature layout; the others show their app icon instead of a render */
+#projects .grid { gap: 20px; }
+.card.feature.flip { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); padding: 0 clamp(24px, 3.4vw, 40px) 0 0; }
+.card.feature.flip .feature-img { order: -1; }
+.feature-img.icon { display: grid; place-items: center; background: radial-gradient(55% 65% at 50% 50%, color-mix(in srgb, var(--fill) 22%, transparent), transparent 72%); }
+.feature-img.icon img { position: static; width: min(42%, 200px); height: auto; border-radius: 25%; filter: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 30px 60px -18px color-mix(in srgb, var(--fill) 45%, rgba(0, 0, 0, 0.8)); }
+.card.feature:hover .feature-img.icon img { transform: translateY(-8px) scale(1.05) rotate(-4deg); }
+@media (max-width: 900px) {
+  .card.feature.flip { grid-template-columns: minmax(0, 1fr); padding: 0; }
+  .card.feature.flip .feature-img { order: 1; }
+  .feature-img.icon { min-height: 220px; }
+}
