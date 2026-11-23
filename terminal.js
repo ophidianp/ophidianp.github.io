@@ -65,6 +65,20 @@
     boba: "https://ophidianp.github.io/boba_drops_page/",
   };
 
+  // each project's own accent, taken from its website (dark-mode value): `accent salt`, `accent argon`, ...
+  const projectAccents = {
+    mouse33: "#5872f2",
+    argon: "#ff6a3d",
+    salt: "#7cc8ff",
+    chlorine: "#7ab8ff",
+    cornea: "#3fe0c5",
+    isotope: "#b79cf0",
+    facet: "#14b896",
+    boba: "#00c9c9",
+    swirl: "#00c9c9",
+  };
+  const accentAliases = { m33: "mouse33", "mouse-33": "mouse33", "boba-drops": "boba", boba_drops: "boba", "swirl-website": "swirl", swirl_website: "swirl", saltclient: "salt" };
+
   const projects = [
     ["salt", "client", "glassy minecraft client with its own hud + mods, 1.21 to 26.3"],
     ["chlorine", "mod", "sodium-compatible performance & power mod for 26.3"],
@@ -234,7 +248,14 @@
     accent: ["change the site colour", ([color]) => {
       if (!color) {
         print(`current accent: ${acc(rainbowFrame ? "rainbow" : esc(currentAccent()))}`);
-        return print(dim("usage: accent &lt;color&gt;  e.g. accent #ff4fd8, accent orange, accent rainbow, accent reset"));
+        print(dim("usage: accent &lt;color&gt;  e.g. accent #ff4fd8, accent orange, accent rainbow, accent reset"));
+        return print(dim(`or a project's own colour: ${Object.keys(projectAccents).join(", ")}`));
+      }
+      const named = projectAccents[accentAliases[color.toLowerCase()] || color.toLowerCase()];
+      if (named) {
+        const name = accentAliases[color.toLowerCase()] || color.toLowerCase();
+        setAccent(named);
+        return print(`accent set to ${acc(esc(name))} ${dim(`(${named})`)}. ${dim("'accent reset' to go back")}`);
       }
       if (color.toLowerCase() === "reset") {
         setAccent(null);
@@ -325,7 +346,7 @@
     const last = parts.at(-1).toLowerCase();
     let pool = Object.keys(commands);
     if (parts.length === 2) {
-      pool = { open: Object.keys(places), website: Object.keys(websites), cat: Object.keys(files), dir: ["/a"], accent: ["reset"] }[parts[0].toLowerCase()] || [];
+      pool = { open: Object.keys(places), website: Object.keys(websites), cat: Object.keys(files), dir: ["/a"], accent: ["reset", "rainbow", ...Object.keys(projectAccents)] }[parts[0].toLowerCase()] || [];
     } else if (parts.length > 2) return;
     const hits = pool.filter((c) => c.startsWith(last));
     if (hits.length === 1) {
